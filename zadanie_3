@@ -1,0 +1,13 @@
+#include<iostream>
+#include<time.h>
+
+using namespace std;
+
+int main() 
+{
+	srand(time(0));
+	cin.get();
+	cout << rand() % 6 + 1 << " ; ";
+	cout << rand() % 6 + 1;
+	return 0;
+}
