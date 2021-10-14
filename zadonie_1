@@ -1,0 +1,35 @@
+#include  <iostream>
+
+using namespace std;
+
+int DEL(int x) 
+{
+	int y = 1;
+	int S = 0;
+	int z = (x / 2);
+	while (y <= z) 
+	{
+		if (x % z == 0) 
+		{
+			S += y;
+		}
+		y++;
+	}
+	return S;
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	cout << "Дружественные числа меньше 10000:" << endl;
+	for (int first = 1; first <= 10000; fist++) 
+	{
+		for (int second = first; second <= fist + 1000; second++) 
+		{
+			if (first != second && DEL(second) == first && DEL(first) == second && first < second) 
+			{
+				cout << first << " -- " << second << endl;
+			}
+		}
+	}
+}
