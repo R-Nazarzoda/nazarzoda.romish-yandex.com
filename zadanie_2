@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+int fichi(int n) 
+{
+	int num = 0;
+	int a = 1;
+	int c;
+	for (int k = 1; k <= n; k++) 
+	{
+		c = num;
+		num = num + a;
+		a = c;
+	}
+	return num;
+}
+
+int main() 
+{
+	setlocale(LC_ALL, "Russian");
+	int n;
+	cout << "Введите N-е число Фибоначи:" << endl;
+	cin >> n;
+	cout << n;
+	cout << fichi(n);
+
+}
