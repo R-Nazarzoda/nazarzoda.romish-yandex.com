@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int dec( int x) 
+{
+    if (x == 0) return 0;
+    return x % 10 + 2 *dec(x / 10);
+}
+int main() 
+{
+    int n;
+    setlocale(LC_ALL, "rus");
+    cout << "Введите двоичный код :";
+    cin >> n;
+    cout <<dec(n);
+}
