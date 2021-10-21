@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+
+int f(int x) {
+    int a = 2;
+    while (pow(a, 2)) {
+        if (x % a == 0)
+        {
+            cout << a << " ";
+            x = x / a;
+        }
+        else {
+            a++;
+        }
+    }
+    if (x > 1)
+    cout << x;
+    
+    return x;
+}
+
+int main()
+{
+    setlocale(LC_ALL, "rus");
+    cout << "Введите число:";
+    int n;
+    cin >> n;
+    f(n);
+}
