@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+
+int main(){
+	const size_t S = 80;
+	char s[S];
+	const size_t W = 20;
+	char w[W];
+	cin.getline(s, sizeof(s));
+	cin.getline(w, sizeof(w));
+	size_t i= 0;
+	size_t len = strlen(w);
+
+	for (const char* src = s;
+		(src = strstr(src, w)) != nullptr; src += len){
+		if (not (src != s && isalnum((unsigned char) * (src - 1)) || isalnum((unsigned char) * (src + len)))){
+			i++;
+		}
+	}
+	cout << i << "\n\n";
+	return 0;
+}
