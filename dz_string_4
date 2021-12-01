@@ -1,0 +1,13 @@
+#include <iostream>
+using namespace std;
+
+int main(){
+	string i_f;
+	string ras;
+	cin >> i_f;
+	cin >> ras;
+	string newi_f = i_f.substr(0, i_f.find_last_of('.')) + "." + ras;
+	cout << newi_f << "\n\n";
+
+	return 0;
+}
