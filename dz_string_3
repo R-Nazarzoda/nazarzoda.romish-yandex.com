@@ -1,0 +1,24 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main(){
+	char s[100];
+	size_t a = 0;
+	cin.getline(s,100);
+
+	while (s[a] != ' ')
+		a++;
+	cout << s[++a] << '.';
+
+	while (s[a] != ' ')
+		a++;
+	cout << s[++a] << ". ";
+
+	a = 0;
+	while (s[a] !=  ' ')
+		cout << s[a++];
+	cout << "\n\n";
+	return 0;
+}
