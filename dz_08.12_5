@@ -1,0 +1,66 @@
+#include  <iostream>
+#include <ctime>
+
+using namespace std;
+
+int w(int** mas, int n, int m) 
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			mas[i][j] = rand() % 10;
+		}
+	}
+	return 0;
+}
+int w_2(int** mas, int n, int m) 
+{
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			cout << mas[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+int f_max(int* mas, int size) 
+{
+	int max = mas[1];
+	for (int i = 1; i < size; i++) 
+	{
+		if (mas[i] > max) max = mas[i];
+	}
+	return(max);
+}
+
+int f_min_index(int* mas, int size)
+{
+	int min = 0;
+	for (int i = 1; i < size; i++)
+		if (mas[i] < mas[min]) min = i;
+
+	return(min);
+}
+int main() 
+{
+	setlocale(LC_ALL, "Rus");
+	srand(time(0));
+	int str, sto;
+	cin >> str >> sto;
+	int** mas = new int* [str];
+	for (int i = 0; i < str; i++) 
+	{
+		mas[i] = new int[sto];
+	}
+	w(mas, str, sto);
+	for (int i = str - 1; i > 0; i--) 
+	{
+		int t = f_min_index(mas[i], sto);
+		mas[i][t] = f_max(mas[i - 1], sto);
+	}
+
+	w_2(mas, str, sto);
+}
