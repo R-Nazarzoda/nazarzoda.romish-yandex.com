@@ -1,30 +1,43 @@
 #include  <iostream>
 #include <ctime>
+
 using namespace std;
-int w(int** mas, int n, int m) {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
+
+int w(int** mas, int n, int m) 
+{
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
 			mas[i][j] = rand() % 10;
 		}
 	}
 	return 0;
 }
-int w_2(int** mas, int n, int m) {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
+
+int w_2(int** mas, int n, int m) 
+{
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
 			cout << mas[i][j] << " ";
 		}
 		cout << endl;
 	}
 	return 0;
 }
-int w_3(int** mas, int n, int m) {
+int w_3(int** mas, int n, int m) 
+{
 	int i_min = 0;
 	int j_min = 0;
 	int min = mas[0][0];
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			if (min > mas[i][j]) {
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			if (min > mas[i][j]) 
+			{
 				min = mas[i][j];
 				i_min = i;
 				j_min = j;
@@ -33,13 +46,17 @@ int w_3(int** mas, int n, int m) {
 	}
 	return (i_min);
 }
-int w_4(int** mas, int n, int m) {
+int w_4(int** mas, int n, int m) 
+{
 	int i_min = 0;
 	int j_min = 0;
 	int min = mas[0][0];
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
-			if (min > mas[i][j]) {
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			if (min > mas[i][j]) 
+			{
 				min = mas[i][j];
 				i_min = i;
 				j_min = j;
@@ -48,20 +65,24 @@ int w_4(int** mas, int n, int m) {
 	}
 	return (j_min);
 }
-int main() {
+
+int main() 
+{
 	setlocale(LC_ALL, "Rus");
 	srand(time(0));
 	int str;
 	cin >> str;
 	int** mas = new int* [str];
-	for (int i = 0; i < str; i++) {
+	for (int i = 0; i < str; i++) 
+	{
 		mas[i] = new int[str];
 	}
 	w(mas, str, str);
 	w_2(mas, str, str);
 	int i_min = w_3(mas, str, str);
 	int j_min = w_4(mas, str, str);
-	for (int i = 0; i < str; i++) {
+	for (int i = 0; i < str; i++) 
+	{
 		swap(mas[i_min][i], mas[i][j_min]);
 	}
 	w_2(mas, str, str);
