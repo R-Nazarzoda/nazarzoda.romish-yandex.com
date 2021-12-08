@@ -1,34 +1,45 @@
 #include  <iostream>
 #include <ctime>
+
 using namespace std;
-int w(int** mas, int n, int m) {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
+
+int w(int** mas, int n, int m) 
+{
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
 			mas[i][j] = rand() % 10;
 		}
 	}
 	return 0;
 }
-int w_2(int** mas, int n, int m) {
-	for (int i = 0; i < n; i++) {
-		for (int j = 0; j < m; j++) {
+int w_2(int** mas, int n, int m) 
+{
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
 			cout << mas[i][j] << " ";
 		}
 		cout << endl;
 	}
 	return 0;
 }
-int main() {
+int main() 
+{
 	setlocale(LC_ALL, "Rus");
 	srand(time(0));
 	int str;
 	cin >> str;
 	int** mas = new int* [str];
-	for (int i = 0; i < str; i++) {
+	for (int i = 0; i < str; i++) 
+	{
 		mas[i] = new int[str];
 	}
 	int** mas_1 = new int* [str];
-	for (int i = 0; i < str; i++) {
+	for (int i = 0; i < str; i++) 
+	{
 		mas_1[i] = new int[str];
 	}
 	w(mas, str, str);
@@ -36,13 +47,17 @@ int main() {
 	w_2(mas, str, str);
 	w_2(mas_1, str, str);
 	int** mas_2 = new int* [str];
-	for (int i = 0; i < str; i++) {
+	for (int i = 0; i < str; i++) 
+	{
 		mas_2[i] = new int[str];
 	}
-	for (int i = 0; i < str; i++) {
-		for (int j = 0; j < str; j++) {
+	for (int i = 0; i < str; i++) 
+	{
+		for (int j = 0; j < str; j++) 
+		{
 			mas_2[i][j] = 0;
-			for (int t = 0; t < str; t++) {
+			for (int t = 0; t < str; t++) 
+			{
 				mas_2[i][j] += mas[i][t] * mas_1[t][j];
 			}
 		}
