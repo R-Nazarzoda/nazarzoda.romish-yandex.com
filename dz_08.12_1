@@ -1,0 +1,89 @@
+#include <iostream>
+#include <ctime>
+
+
+using namespace std;
+
+int w(int** mas, int n, int m) 
+{
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			mas[i][j] = rand() % 10;
+		}
+	}
+	return 0;
+}
+int w_1(int** mas, int n, int m) 
+{
+	for (int i = 0; i < n; i++)
+	{
+		for (int j = 0; j < m; j++)
+		{
+			if (mas[i][j] > 0) cout << mas[i][j] << " ";
+		}
+		cout << endl;
+	}
+	return 0;
+}
+int w_3(int** mas, int n, int m) 
+{
+	int i_min = 0;
+	int j_min = 0;
+	int min = mas[0][0];
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			if (min > mas[i][j]) 
+			{
+				min = mas[i][j];
+				i_min = i;
+				j_min = j;
+			}
+		}
+	}
+	return (i_min);
+}
+int w_4(int** mas, int n, int m) 
+{
+	int i_min = 0;
+	int j_min = 0;
+	int min = mas[0][0];
+	for (int i = 0; i < n; i++) 
+	{
+		for (int j = 0; j < m; j++) 
+		{
+			if (min > mas[i][j]) 
+			{
+				min = mas[i][j];
+				i_min = i;
+				j_min = j;
+			}
+		}
+	}
+	return (j_min);
+}
+int main() 
+{
+	setlocale(LC_ALL, "Rus");
+	srand(time(0));
+	int str, sto;
+	cout << "Введите 2 2 для вывода двумерной матрицы:" <<endl;
+	cin >> str >> sto;
+	int** mas = new int* [str];
+	for (int i = 0; i < str; i++) 
+	{
+		mas[i] = new int[sto];
+	}
+	w(mas, str, sto);
+	w_1(mas, str, sto);
+	int iMin = w_3(mas, str, sto);
+	int jMin = w_4(mas, str, sto);
+	for (int j = 0; j < sto; j++) 
+	{ mas[iMin][j] = -1; }
+	for (int i = 0; i < str; i++) 
+	{ mas[i][jMin] = -1; }
+	w_1(mas, str, sto);
+}
