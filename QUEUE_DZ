@@ -1,0 +1,143 @@
+#include <fstream>
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+
+struct person {
+    char name[50];
+    int age;
+};
+struct queue {
+    person value;
+    queue* next;
+};
+
+struct queue_pts {
+    queue* head = nullptr;
+    queue* tail = nullptr;
+    size_t length = 0;
+};
+
+void delete_q_elem(queue_pts& q_pt) {
+    queue* rem = q_pt.head;
+    q_pt.head = q_pt.head->next;
+    delete rem;
+    q_pt.length--;
+}
+void enqueue(queue_pts& q_pt, person p)
+{
+    queue* new_q = new queue;
+    new_q->value = p;
+    if (!q_pt.tail) {
+        q_pt.head = q_pt.tail = new_q;
+    }
+    else
+    {
+        q_pt.tail->next = new_q;
+        q_pt.tail = new_q;
+    }
+    q_pt.length++;
+}
+void enqueue(queue_pts& q_pt, const char* name, int age)
+{
+    person* new_p = new person;
+    new_p->age = age;
+    strcpy_s(new_p->name, name);
+    enqueue(q_pt, *new_p);
+}
+
+bool dequeue(queue_pts& q_pt, person& p)
+{
+    if (!q_pt.head) {
+        return false;
+    }
+    p = q_pt.head->value;
+    delete_q_elem(q_pt);
+    if (!q_pt.head) {
+        q_pt.tail = nullptr;
+    }
+    return true;
+}
+
+void clear(queue_pts& q_pt) {
+    while (q_pt.head)
+    {
+        delete_q_elem(q_pt);
+    }
+    q_pt.tail = nullptr;
+}
+
+void load_queue(const char* filename, queue_pts& empl, queue_pts& unempl)
+{
+    ifstream f(filename);
+    if (f.is_open()) {
+        while (!f.eof())
+        {
+            char* man = new char[120];
+            f.getline(man, 120);
+            char* name = new char[50];
+            char* initials = new char[7];
+            char* sex = new char[5];
+            int age;
+            char* job = new char[20];
+            int income;
+            char* purpose = new char[20];
+
+            sscanf_s(man, "%s %s %s %d %s %d %s", name, 50, initials, 4, sex, 5, &age, job, 20, &income, purpose, 20);
+            if (!strcmp(purpose, "вклад")) {
+                enqueue(unempl, name, age);
+            }
+            else
+            {
+                enqueue(empl, name, age);
+            }
+        }
+        f.close();
+    }
+    else {
+        cout << "can not read the file\n";
+    }
+}
+
+
+void show_queue(queue_pts& q_pt)
+{
+    int i = 0;
+    while (q_pt.length > 0) {
+        person p;
+        if (dequeue(q_pt, p)) {
+            cout << ++i << ".\t" << p.name << "\t Age: " << p.age << endl;
+        }
+    }
+
+}
+
+void main() {
+    setlocale(LC_ALL, "rus");
+    queue_pts employable;
+    queue_pts unemployable;
+    load_queue("data.txt", employable, unemployable);
+    cout << "credit: \n";
+    show_queue(employable);
+    cout << "vklad: \n";
+    show_queue(unemployable);
+}
+
+
+/////////////////////////////////////////////////////////
+/*
+data.txt
+Турсунова и.а ж 14 отсутствует 2000 вклад
+Коршунова и.п ж 15 отсутствует 1 кредит
+Мечников и.г  м 33 маи 1800 вклад
+Петрова а.б ж 22 мгу 1000 кредит
+Трусова в.в ж 48 кфу 500 кредит
+Хайруллин р.р м 29 спбгу 400 вклад
+Васильев П.Л м 45 кфу 1000 кредит
+Власов А.Ш  м 39 мгимо 1200 кредит
+Воронцова Ю.Е ж 61 кфу 1000 кредит
+Еремеева А.П ж 70 ранхигс 800 вклад
+*/
+/////////////////////////////////////////////////////////
